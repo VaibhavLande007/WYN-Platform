@@ -1,0 +1,48 @@
+entity Address {
+	street String
+	pin String
+	city String
+	stateProvince String
+    countryName String
+}
+
+entity Role {
+	name String
+    descr String
+}
+
+entity UserDetail {
+	firstName String
+	lastName String
+	email String
+	phoneNumber String
+	createdAt Date
+    updatedAt Date
+}
+
+entity Account {
+	name String
+	email String
+    details String
+	createdAt Date
+    updatedAt Date
+}
+
+relationship OneToOne {
+	UserDetail to Address{billing}
+    UserDetail to Role{role}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Account to UserDetail{userDetail}
+}
+
+
+// Set pagination options
+paginate Account, Address, UserDetail with infinite-scroll
+
+
+// Set service options to all except few
+service all with serviceImpl
+
